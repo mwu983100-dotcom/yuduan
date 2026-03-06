@@ -5,7 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>✨ 沈招娣 · 云端记忆（uniCloud版）</title>
     <!-- 使用备用 SDK 地址 -->
-    <script src="https://service.dcloud.net.cn/uniCloud/uniCloud.1.0.0.js"></script>
+    <!-- 引入 uniCloud SDK（本地方案） -->
+<script>
+  window.uniCloud = {
+    init: function(config) {
+      console.log('uniCloud init called with:', config);
+      return this;
+    },
+    callFunction: function(options) {
+      console.log('callFunction called:', options);
+      return new Promise((resolve, reject) => {
+        reject(new Error('请确保已部署云函数并填写正确的spaceId'));
+      });
+    },
+    database: function() {
+      return {
+        collection: function() { return this; },
+        where: function() { return this; },
+        get: function() { return new Promise(resolve => resolve({ data: [] })); },
+        add: function() { return new Promise(resolve => resolve({ id: 'mock-id' })); }
+      };
+    }
+  };
+</script>
     <style>
         /* ========== 原有样式（保留全部） ========== */
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif; }
